@@ -119,6 +119,11 @@
           }
         }
       }
-    }},
-  "defaultProject": "Todo-Proj"
+    }
+  },
+  "defaultProject": "Todo-Proj",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics",
+    "analytics": false
+  }
 }

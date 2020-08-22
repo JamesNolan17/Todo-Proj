@@ -1,0 +1,15 @@
+.new-todo{
+  text-align: center;
+}
+.checkbox{
+  height: 30px;
+  width: 30px;
+  margin-bottom: 30px;
+}
+.text{
+  height: 30px;
+  margin-bottom: 30px;
+}
+.button{
+  width:150px;
+}
