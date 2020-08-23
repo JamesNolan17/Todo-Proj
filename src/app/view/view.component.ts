@@ -31,8 +31,8 @@ export class ViewComponent {
     );
   }
   changeStatus(name,checked){
-    //this.store.dispatch(changeStatus({name:name}));
-    //this.todoService.changeStatus(name,checked);
+    this.store.dispatch(changeStatus({name:name}));
+    this.todoService.changeStatus(name,checked);
   }
 
   delItem(name){
