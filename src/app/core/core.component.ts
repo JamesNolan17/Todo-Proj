@@ -17,18 +17,21 @@ import {updateItem,addItem,delItem,changeStatus} from "../actions/todo-action.ac
 
 export class CoreComponent {
   public importance: boolean = false;
-  constructor(public store:Store<{todoReducer:todo_interface[]}>) {
+  constructor(public store:Store<{todoReducer:todo_interface[]}>,
+              public todoService: TodoService) {
   }
 
 
   addItem(name,start,end) {
-    this.store.dispatch(addItem({todo: {
-        name:name.value,
-        start_time:start.value,
-        end_time:end.value,
-        importance:this.importance,
-        checked: false
-      }}))
+    var item = {
+      name:name.value,
+      start_time:start.value,
+      end_time:end.value,
+      importance:this.importance,
+      checked: false
+    }
+    this.todoService.addItem(item)
+    this.store.dispatch(addItem({todo: item}))
   }
 
   importanceClick(){

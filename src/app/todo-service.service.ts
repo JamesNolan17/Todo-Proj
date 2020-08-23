@@ -14,29 +14,41 @@ export class TodoService {
   public show: Observable<todo_interface[]>;
   public nothing : Observable<todo_interface[]>;
   private subscription: Subscription;
-  stateCtrl = new FormControl()
+  public collection: AngularFirestoreCollection<todo_interface>;
+
   constructor(public firebasedb: AngularFirestore,
               public store:Store<{todoReducer:todo_interface[]}>,
               ) {
-    const collection = this.firebasedb.collection('/nolan')
     //GET
-    this.toDoList = collection.valueChanges();
+    this.collection = firebasedb.collection('/nolan')
+    this.toDoList = this.collection.valueChanges();
     this.show = this.toDoList;
     this.nothing = this.show.pipe(map(items => items));
     this.subscription = this.nothing.subscribe(val => this.updateItem(val));
-    //
   }
   updateItem(val:todo_interface[]){
     console.log(val);
     this.store.dispatch(updateItem({todoArray: val}));
   }
-  addItem(){
 
+  addItem(item:todo_interface){
+    this.collection.doc(item.name).set(item);
   }
-  delItem(){
-
+  delItem(name:string){
+    this.collection.doc(name).delete().then(function() {
+      console.log("Document successfully deleted!");
+    }).catch(function(error) {
+      console.error("Error removing document: ", error);
+    });
   }
-  changeStatus(){
-
+  changeStatus(name,checked){
+    this.collection.doc(name).update({
+      checked: !checked
+    }).then(function() {
+      console.log("Document successfully edited!");
+      console.log(name)
+    }).catch(function(error) {
+      console.error("Error removing document: ", error);
+    });
   }
 }

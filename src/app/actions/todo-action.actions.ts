@@ -18,7 +18,7 @@ export const updateItem = createAction(
 
 export const changeStatus = createAction(
   '[View] change Status',
-  props<{name:String}>()
+  props<{name: String}>()
 );
 
 

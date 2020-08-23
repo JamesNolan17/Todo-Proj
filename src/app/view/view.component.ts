@@ -17,7 +17,6 @@ import {updateItem,addItem,delItem,changeStatus} from "../actions/todo-action.ac
 
 export class ViewComponent {
   public todoArray: Array<todo_interface>;
-  public Obshow: Observable<todo_interface[]>;
   public show: Observable<todo_interface[]>;
   public checked: Observable<todo_interface[]>;
   public unchecked: Observable<todo_interface[]>;
@@ -31,12 +30,14 @@ export class ViewComponent {
       map(items => items.filter(item => !item.checked))
     );
   }
-  changeStatus(name){
-    this.store.dispatch(changeStatus({name: name}));
+  changeStatus(name,checked){
+    //this.store.dispatch(changeStatus({name:name}));
+    //this.todoService.changeStatus(name,checked);
   }
 
   delItem(name){
     this.store.dispatch(delItem({name: name}));
+    this.todoService.delItem(name);
   }
 
 }
